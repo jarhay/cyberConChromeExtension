@@ -1,0 +1,149 @@
+<html>
+  <head>
+    <style>
+      body {
+        background-color: hsl(200, 80%, 30%);
+        background-image: radial-gradient(
+          hsl(200, 80%, 30%),
+          hsl(210, 80%, 20%)
+        );
+        color: white;
+        font-family: Raleway, Helvetica, Arial, sans-serif;
+        line-height: 1.4;
+        margin: 0;
+        min-height: 100vh;
+        margin-left: 1rem;
+      }
+      .form {
+        display: grid;
+        grid-template-columns: max-content 1fr;
+        gap: 1rem;
+        width: 40vw;
+      }
+      button.is-loading {
+        position: relative;
+        color: transparent;
+      }
+      button.is-loading::after {
+        position: absolute;
+        content: "";
+        display: block;
+        width: 1.4em;
+        height: 1.4em;
+        top: 50%;
+        left: 50%;
+        margin-left: -0.7em;
+        margin-top: -0.7em;
+        border-top: 2px solid white;
+        border-radius: 50%;
+        animation: spin 0.5s linear infinite;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      .accountTable {
+        border-collapse: collapse;
+        margin: 25px 0;
+        font-size: 0.9em;
+        font-family: sans-serif;
+        min-width: 40vw;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+      }
+      .accountTable thead tr {
+        background-color: #009879;
+        color: #ffffff;
+        text-align: left;
+      }
+      .accountTable th,
+      .accountTable td {
+        padding: 12px 15px;
+      }
+
+      .accountTable tbody tr {
+        border-bottom: 1px solid #dddddd;
+      }
+
+      .accountTable tbody tr:last-of-type {
+        border-bottom: 2px solid #009879;
+      }
+
+      a {
+          color: white;
+      }
+      a:visited{
+          color: grey
+      }
+
+      #viewData{
+          display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Big Blue Bank Login</h1>
+    <div id="login">
+      <p>Big Blue Bank uses only the most secure login technologies.</p>
+      <form class="form">
+        <label for="email">Email</label>
+        <input type="email" id="email" />
+        <label for="password">Password</label>
+        <input type="password" id="password" />
+        <button type="submit" id="submit-button">Submit</button>
+      </form>
+    </div>
+    <div id="viewData">
+      <p>Your bank account details:</p>
+      <table class="accountTable">
+        <thead>
+          <tr>
+            <th>Account Name</th>
+            <th>Account Balance</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Transaction Account</td>
+            <td>$1,234.56</td>
+          </tr>
+          <tr>
+            <td>Savings Account</td>
+            <td>$78,901.23</td>
+          </tr>
+        </tbody>
+      </table>
+      <a href="./accountBalance.html">Download account details here</a>
+    </div>
+    <script type="text/javascript">
+      var email = document.getElementById("email");
+      var password = document.getElementById("password");
+      var button = document.getElementById("submit-button");
+      
+      var loginDiv = document.getElementById("login");
+      var viewDataDiv = document.getElementById("viewData");
+      console.log(loginDiv,viewDataDiv)
+
+      button.addEventListener("click", function (event) {
+        event.preventDefault();
+        button.classList.add("is-loading");
+        button.disabled = true;
+        email.disabled = true;
+        password.disabled = true;
+        setTimeout(() => {
+          button.classList.remove("is-loading");
+          button.disabled = false;
+          email.disabled = false;
+          password.disabled = false;
+          loginDiv.style.display = "none";
+          viewDataDiv.style.display = "contents";
+        }, 2000);
+      });
+    </script>
+  </body>
+</html>
